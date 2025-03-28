@@ -23,6 +23,8 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::936347005826:role/GitHubActionsLamdaDeploy
           aws-region: us-east-1
+        env:
+          AWS_DEBUG: "true" # Extra Logging
       - name: Deploy to Lambda
         run: |
           zip -r function.zip .
