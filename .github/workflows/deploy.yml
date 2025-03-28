@@ -2,6 +2,9 @@ name: Deploy to AWS Lambda
 on:
   push:
     branches: [main]
+permissions:
+  id-token: write # Grant OIDC token access
+  contents: read # Allow checkout
 jobs:
   deploy:
     runs-on: ubuntu-20.04
@@ -11,7 +14,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y python2
-          sudo ln -sf /usr/bin/python2 /usr/bin/python  # Force overwrite existing link
+          sudo ln -sf /usr/bin/python2 /usr/bin/python
           curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
           python get-pip.py
       - name: Install dependencies
@@ -25,7 +28,7 @@ jobs:
           aws-region: us-east-1
         env:
           ACTIONS_STEP_DEBUG: "true"
-          AWS_DEBUG: "true" # Extra Logging
+          AWS_DEBUG: "true"
       - name: Deploy to Lambda
         run: |
           zip -r function.zip .
