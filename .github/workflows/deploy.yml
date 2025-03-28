@@ -24,7 +24,7 @@ jobs:
           role-to-assume: arn:aws:iam::936347005826:role/GitHubActionsLambdaDeploy
           aws-region: us-east-1
         env:
-          ACTIONS_STEP_DEBUG:"true"
+          ACTIONS_STEP_DEBUG: "true"
           AWS_DEBUG: "true" # Extra Logging
       - name: Deploy to Lambda
         run: |
