@@ -11,7 +11,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y python2
-          sudo ln -s /usr/bin/python2 /usr/bin/python
+          sudo ln -sf /usr/bin/python2 /usr/bin/python  # Force overwrite existing link
           curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
           python get-pip.py
       - name: Install dependencies
