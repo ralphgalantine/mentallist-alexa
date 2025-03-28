@@ -6,11 +6,14 @@ jobs:
   deploy:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "2.7" # Match your Lambda runtime (e.g., 3.9 or 3.11)
+        - uses: actions/checkout@v3
+        - name: Install Python 2.7
+          run: |
+            sudo apt update
+            sudo apt install -y python2
+            sudo ln -s /usr/bin/python2 /usr/bin/python  # Ensure 'python' command works
+            curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
+            python get-pip.py
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -18,7 +21,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam::936347005826:role/GitHubActionsLamdaDeploy # This isgit  IAM role ARN
+          role-to-assume: arn:aws:iam::936347005826:role/GitHubActionsLamdaDeploy # This is git  IAM role ARN
           aws-region: us-east-1 # Alexa skills use us-east-1
       - name: Deploy to Lambda
         run: |
