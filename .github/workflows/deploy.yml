@@ -32,4 +32,4 @@ jobs:
       - name: Deploy to Lambda
         run: |
           zip -r function.zip .
-          aws lambda update-function-code --function-name MENTALLISTHANDLER_ALEXA --zip-file fileb://function.zip
+          aws lambda update-function-code --function-name mentalListHandler_Alexa --zip-file fileb://function.zip
